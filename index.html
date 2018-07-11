@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html ng-app='myApp'>
+  <head>
+    <meta charset="utf-8" />
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.3/angular.min.js"></script>
+    <title>Exercice3</title>
+  </head>
+  <body ng-controller="customersCtrl">
+    <table cellspacing="2px" cellpadding="2px;" rules="all" style="border:solid 1px black;">
+      <thead>
+        <tr>
+          <th>Marque</th>
+          <th>Couleur</th>
+        </tr>
+      </thead>
+      <tr ng-repeat="x in myData | filter : 'vert'">
+      <td>{{x.marque}}</td>
+      <td>{{x.couleur}}</td>
+      </tr>
+    </table>
+
+    <script>
+      var app = angular.module('myApp',[]);
+      app.controller('customersCtrl',function($scope,$http){
+        $http.get("voiture.json").then(function(response){
+          $scope.myData = response.data;
+        });
+      });
+    </script>
+  </body>
+</html>
